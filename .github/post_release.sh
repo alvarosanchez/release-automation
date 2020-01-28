@@ -25,7 +25,7 @@ echo $release_body
 
 echo -n "Updating release body: "
 release_body="${release_body} ${issues_closed}"
-release_body=`cat $release_body | jq -aRs .`
+release_body=`echo $release_body | jq -aRs .`
 echo $release_body
 curl -s --request PATCH -H "Authorization: Bearer $1" -H "Content-Type: application/json" $release_url --data "{\"body\": $release_body}"
 
