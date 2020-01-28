@@ -24,10 +24,9 @@ release_body=`cat $GITHUB_EVENT_PATH | jq '.release.body'`
 echo $release_body
 
 echo -n "Updating release body: "
-release_body="${release_body} ${issues_closed}"
-release_body=`echo $release_body | jq -aRs .`
+release_body="${release_body}\r\n${issues_closed}"
 echo $release_body
-curl -s --request PATCH -H "Authorization: Bearer $1" -H "Content-Type: application/json" $release_url --data "{\"body\": $release_body}"
+curl -i --request PATCH -H "Authorization: Bearer $1" -H "Content-Type: application/json" $release_url --data "{\"body\": $release_body}"
 
 echo "Creating new milestone"
 curl -s --request POST -H "Authorization: Bearer $1" -H "Content-Type: application/json" "https://api.github.com/repos/$2/milestones" --data "{\"title\": \"$4\"}"
