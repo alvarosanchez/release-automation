@@ -12,15 +12,15 @@ echo "Closing current milestone"
 curl -s --request PATCH -H "Authorization: Bearer $1" -H "Content-Type: application/json" https://api.github.com/repos/$2/milestones/$milestone_number --data '{"state":"closed"}'
 
 echo "Getting issues closed"
-issues_closed=`curl -s "https://api.github.com/repos/$2/issues?milestone=$milestone_number" | jq '.[] | "\(.title) (#\(.number))"'` | sed -e 's/^"\(.*\)"$/\1/g'
+issues_closed=`curl -s "https://api.github.com/repos/$2/issues?milestone=$milestone_number" | jq '.[] | "* \(.title) (#\(.number))"'` | sed -e 's/^"\(.*\)"$/\1/g'
 echo $issues_closed
 
 echo -n "Getting release url: "
-release_url=`cat $GITHUB_EVENT_PATH | jq '.release.url'` | sed -e 's/"//g'`
+release_url=`cat $GITHUB_EVENT_PATH | jq '.release.url'` | sed -e 's/"//g'
 echo $release_url
 
 echo -n "Getting release body: "
-release_body=`cat $GITHUB_EVENT_PATH | jq '.release.body'` | sed -e 's/"//g'`
+release_body=`cat $GITHUB_EVENT_PATH | jq '.release.body'` | sed -e 's/"//g'
 echo $release_body
 
 echo -n "Updating release body: "
