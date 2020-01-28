@@ -15,13 +15,17 @@ echo "Creating new milestone"
 curl -s --request POST -H "Authorization: Bearer $1" -H "Content-Type: application/json" "https://api.github.com/repos/$2/milestones" --data "{\"title\": \"$4\"}"
 
 echo "Setting new snapshot version"
-sed -i "" "s/^projectVersion\=\(.*\)$/projectVersion\=${4}-SNAPSHOT/" gradle.properties
+sed -i "s/^projectVersion.*$/projectVersion\=${4}-SNAPSHOT/" gradle.properties
 cat gradle.properties
 
-echo "Commiting gradle.properties"
+echo "Configuring git"
 git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 git config --global user.name "${GITHUB_ACTOR}"
+echo "Fetching from origin"
+git fetch
+echo "Checking out master"
 git checkout master
 git add gradle.properties 
 git commit -m "Back to snapshot"
+echo "Pushing"
 git push origin master
