@@ -17,13 +17,9 @@ jobs:
         version: ${{ steps.release_version.outputs.release_version }}
     # - name: Remove SNAPSHOT from the version
       # run: sed -i 's/^projectVersion\=\(.*\)-SNAPSHOT$/projectVersion\=\1/' gradle.properties
-    - name: Get milestone id
-      id: milestone_id
-      run: |
-        echo ::set-output name=milestone_id::`curl -s https://api.github.com/repos/${{ github.repository }}/milestones | jq -c '.[] | select (.title == "${{ steps.release_version.outputs.release_version }}") | .id'`
     - name: Close old milestone
       run: |
-        curl -s -X POST -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' -H 'Content-Type: application/json' https://api.github.com/repos/${{ github.repository }}/milestones/${{ steps.milestone_id.outputs.milestone_id }} -d '{"state":"closed"}'
+        curl -s -X POST -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' -H 'Content-Type: application/json' https://api.github.com/repos/${{ github.repository }}/milestones/`curl -s https://api.github.com/repos/${{ github.repository }}/milestones | jq -c '.[] | select (.title == "${{ steps.release_version.outputs.release_version }}") | .id'` -d '{"state":"closed"}'
     - name: Create new milestone
       run: |
         curl -s -X POST https://api.github.com/repos/${{ github.repository }}/milestones -d '{"title": "${{ steps.semvers.outputs.patch }}"}'
@@ -34,4 +30,4 @@ jobs:
     - name: Print gradle.properties
       run: cat gradle.properties
     - name: Commit and push gradle.properties
-      run: git add gradle.properties && git commit -m "Back to snapshot" && git push origin master
+      run: git checkout master && git add gradle.properties && git commit -m "Back to snapshot" && git push origin master
