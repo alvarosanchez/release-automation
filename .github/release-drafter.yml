@@ -2,7 +2,6 @@ name-template: $NEXT_PATCH_VERSION
 tag-template: v$NEXT_PATCH_VERSION
 branches: 
   - master
-  - 1.0.x
 categories:
   - title: 🚀 Features
     label: "type: enhancement"
