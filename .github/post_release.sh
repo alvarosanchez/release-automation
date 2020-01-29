@@ -19,7 +19,7 @@ git add gradle.properties
 git commit -m "Release v${3}"
 git push origin master
 git push origin :refs/tags/v${3}
-git tag -fa v${3}
+git tag -fa v${3} -m "Release v${3}"
 git push origin master --tags
 
 echo -n "Retrieving current milestone number: "
