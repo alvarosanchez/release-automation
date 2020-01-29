@@ -25,7 +25,7 @@ git push origin master --tags
 echo "Closing again the release after updating the tag"
 release_url=`cat $GITHUB_EVENT_PATH | jq '.release.url' | sed -e 's/^"\(.*\)"$/\1/g'`
 echo $release_url
-curl -i --request PATCH -H "Authorization: Bearer $1" -H "Content-Type: application/json" $release_url --data "{\"draft\": false}"
+curl -s --request PATCH -H "Authorization: Bearer $1" -H "Content-Type: application/json" $release_url --data "{\"draft\": false}"
 
 echo -n "Retrieving current milestone number: "
 milestone_number=`curl -s https://api.github.com/repos/$2/milestones | jq -c ".[] | select (.title == \"$3\") | .number" | sed -e 's/"//g'`
