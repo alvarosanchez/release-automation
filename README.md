@@ -1,3 +1,3 @@
-# release-automation 1.1.x
+# release-automation 1.0.x
 
 Repo to test some release-automation stuff
