@@ -1,1 +1,108 @@
-_extends: .github:settings.yaml
+# These settings are synced to GitHub by https://probot.github.io/apps/settings/
+
+repository:
+  # Either `true` to enable issues for this repository, `false` to disable them.
+  has_issues: true
+
+  # Either `true` to enable downloads for this repository, `false` to disable them.
+  has_downloads: true
+
+  # Updates the default branch for this repository.
+  default_branch: master
+
+  # Either `true` to allow squash-merging pull requests, or `false` to prevent
+  # squash-merging.
+  allow_squash_merge: true
+
+  # Either `true` to allow merging pull requests with a merge commit, or `false`
+  # to prevent merging pull requests with merge commits.
+  allow_merge_commit: true
+
+  # Either `true` to allow rebase-merging pull requests, or `false` to prevent
+  # rebase-merging.
+  allow_rebase_merge: true
+
+  # Either true to allow automatically deleting head branches when pull requests are 
+  # merged, or false to prevent automatic deletion. Default: false
+  delete_branch_on_merge: true
+
+# Labels: define labels for Issues and Pull Requests
+labels:
+  - name: 'closed: cannot reproduce'
+    color: fbca04
+    description: The issue cannot be reproduced
+  - name: 'closed: duplicate'
+    color: cfd3d7
+    description: This issue or pull request already exists
+  - name: 'closed: invalid'
+    color: e4e669
+    description: The issue doesn't seem right
+  - name: 'closed: notabug'
+    color: 21b2a1
+    description: The issue is not a bug
+  - name: 'closed: question'
+    color: bae585
+    description: The issue is a question
+  - name: 'closed: won''t fix'
+    color: 306da3
+    description: The issue will not be worked on
+  - name: help wanted
+    color: 008672
+    description: Extra attention is needed
+  - name: 'info: good first issue'
+    color: 7057ff
+    description: Good for newcomers
+  - name: 'info: workaround available'
+    color: bfdadc
+    description: A workaround is available for the issue
+  - name: 'relates-to: build'
+    color: 8ceadc
+    description: label for issues related to the build file or CI
+  - name: 'status: acknowledged'
+    color: 1d76db
+    description: 
+  - name: 'status: awaiting approval'
+    color: fff4b7
+    description: ''
+  - name: 'status: awaiting feedback'
+    color: f0ff6b
+    description: 
+  - name: 'status: awaiting third-party'
+    color: ed84cd
+    description: 
+  - name: 'status: awaiting validation'
+    color: 5319e7
+    description: 
+  - name: 'status: community contribution'
+    color: 80fc14
+    description: ''
+  - name: 'status: example attached'
+    color: f95ce4
+    description: 
+  - name: 'status: future consideration'
+    color: 46a0f4
+    description: 
+  - name: 'status: help wanted'
+    color: 008672
+    description: 
+  - name: 'status: in progress'
+    color: fbca04
+    description: 
+
+# Collaborators: give specific users access to this repository.
+collaborators:
+  - username: alvarosanchez
+    # Note: Only valid on organization-owned repositories.
+    # The permission to grant the collaborator. Can be one of:
+    # * `pull` - can pull, but not push to or administer this repository.
+    # * `push` - can pull and push, but not administer this repository.
+    # * `admin` - can pull, push and administer this repository.
+    permission: admin
+
+# NOTE: The APIs needed for teams are not supported yet by GitHub Apps
+# https://developer.github.com/v3/apps/available-endpoints/
+teams:
+  - name: core
+    permission: admin
+  - name: docs
+    permission: push
