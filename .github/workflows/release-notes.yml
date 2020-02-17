@@ -1,4 +1,4 @@
-name: Release Drafter
+name: Release Notes
 
 on:
   pull_request:
@@ -13,9 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: micronaut-projects/github-actions/release-notes@master
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          repository: ${{ github.repository }}
       - uses: ncipollo/release-action@v1
         with:
           allowUpdates: true

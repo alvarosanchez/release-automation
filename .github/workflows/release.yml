@@ -9,10 +9,6 @@ jobs:
     - uses: actions/checkout@v2
     - name: Run pre-release
       uses: micronaut-projects/github-actions/pre-release@master
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}    
     - run: echo "Doing actual release"
     - name: Run post-release
       uses: micronaut-projects/github-actions/post-release@master
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}            
