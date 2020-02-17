@@ -8,11 +8,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Run pre-release
-      uses: alvarosanchez/github-actions/pre-release@master
+      uses: micronaut-projects/github-actions/pre-release@master
       with:
         token: ${{ secrets.GITHUB_TOKEN }}    
     - run: echo "Doing actual release"
     - name: Run post-release
-      uses: alvarosanchez/github-actions/post-release@master
+      uses: micronaut-projects/github-actions/post-release@master
       with:
         token: ${{ secrets.GITHUB_TOKEN }}            

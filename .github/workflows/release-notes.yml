@@ -1,0 +1,26 @@
+name: Release Drafter
+
+on:
+  pull_request:
+    types: [closed] 
+    branches:
+      - master
+  issues:
+    types: [closed,reopened]
+
+jobs:
+  release_notes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: micronaut-projects/github-actions/release-notes@master
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+      - uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          commit: master
+          draft: true
+          tag: vNEXT
+          bodyFile: CHANGELOG.md
+          token: ${{ secrets.GITHUB_TOKEN }}
