@@ -1,0 +1,13 @@
+name: Test gh tool
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  gh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test gh CLI
+        run: gh --version
