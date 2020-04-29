@@ -13,6 +13,7 @@ jobs:
       - name: Checkout micronaut-core
         uses: actions/checkout@v2
         with:
+          token: ${{ secrets.GH_TOKEN }}
           repository: micronaut-projects/micronaut-core
           ref: master
           path: micronaut-core      
